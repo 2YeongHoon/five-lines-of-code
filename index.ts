@@ -88,6 +88,11 @@ function placeBomb() {
 }
 
 function update() {
+  handlerInputs();
+  updateMap();
+}
+
+function handlerInputs() {
   while (!gameOver && inputs.length > 0) {
     let current = inputs.pop();
     if (current === Input.LEFT) move(-1, 0);
@@ -108,7 +113,9 @@ function update() {
 
   if (--delay > 0) return;
   delay = DELAY;
+}
 
+function updateMap() {
   for (let y = 1; y < map.length; y++) {
     for (let x = 1; x < map[y].length; x++) {
       if (map[y][x] === Tile.BOMB) {

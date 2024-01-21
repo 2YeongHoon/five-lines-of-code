@@ -22,12 +22,110 @@ enum Tile {
   MONSTER_LEFT,
 }
 
-enum Input {
+enum RawInput {
   UP,
   DOWN,
   LEFT,
   RIGHT,
   PLACE,
+}
+
+interface Input {
+  isRight(): boolean;
+  isLeft(): boolean;
+  isUp(): boolean;
+  isDown(): boolean;
+  isPlace(): boolean;
+}
+
+class Right implements Input {
+  isRight() {
+    return true;
+  }
+  isLeft() {
+    return false;
+  }
+  isUp() {
+    return false;
+  }
+  isDown() {
+    return false;
+  }
+  isPlace() {
+    return false;
+  }
+}
+
+class Left implements Input {
+  isRight() {
+    return false;
+  }
+  isLeft() {
+    return true;
+  }
+  isUp() {
+    return false;
+  }
+  isDown() {
+    return false;
+  }
+  isPlace() {
+    return false;
+  }
+}
+
+class Up implements Input {
+  isRight() {
+    return false;
+  }
+  isLeft() {
+    return false;
+  }
+  isUp() {
+    return true;
+  }
+  isDown() {
+    return false;
+  }
+  isPlace() {
+    return false;
+  }
+}
+
+class Down implements Input {
+  isRight() {
+    return false;
+  }
+  isLeft() {
+    return false;
+  }
+  isUp() {
+    return false;
+  }
+  isDown() {
+    return true;
+  }
+  isPlace() {
+    return false;
+  }
+}
+
+class Place implements Input {
+  isRight() {
+    return false;
+  }
+  isLeft() {
+    return false;
+  }
+  isUp() {
+    return false;
+  }
+  isDown() {
+    return false;
+  }
+  isPlace() {
+    return true;
+  }
 }
 
 let playerx = 1;
@@ -111,11 +209,11 @@ function handlerInputs() {
 }
 
 function handlerInput(input: Input) {
-  if (input === Input.LEFT) move(-1, 0);
-  else if (input === Input.RIGHT) move(1, 0);
-  else if (input === Input.UP) move(0, -1);
-  else if (input === Input.DOWN) move(0, 1);
-  else if (input === Input.PLACE) placeBomb();
+  if (input.isLeft()) move(-1, 0);
+  else if (input.isLeft) move(1, 0);
+  else if (input.isUp) move(0, -1);
+  else if (input.isDown) move(0, 1);
+  else if (input.isPlace) placeBomb();
 }
 
 function updateMap() {
@@ -239,9 +337,9 @@ const UP_KEY = "ArrowUp";
 const RIGHT_KEY = "ArrowRight";
 const DOWN_KEY = "ArrowDown";
 window.addEventListener("keydown", (e) => {
-  if (e.key === LEFT_KEY || e.key === "a") inputs.push(Input.LEFT);
-  else if (e.key === UP_KEY || e.key === "w") inputs.push(Input.UP);
-  else if (e.key === RIGHT_KEY || e.key === "d") inputs.push(Input.RIGHT);
-  else if (e.key === DOWN_KEY || e.key === "s") inputs.push(Input.DOWN);
-  else if (e.key === " ") inputs.push(Input.PLACE);
+  if (e.key === LEFT_KEY || e.key === "a") inputs.push(new Left());
+  else if (e.key === UP_KEY || e.key === "w") inputs.push(new Up());
+  else if (e.key === RIGHT_KEY || e.key === "d") inputs.push(new Right());
+  else if (e.key === DOWN_KEY || e.key === "s") inputs.push(new Down());
+  else if (e.key === " ") inputs.push(new Place());
 });

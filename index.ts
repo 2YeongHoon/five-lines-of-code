@@ -36,6 +36,7 @@ interface Input {
   isUp(): boolean;
   isDown(): boolean;
   isPlace(): boolean;
+  handler(): void;
 }
 
 class Right implements Input {
@@ -53,6 +54,9 @@ class Right implements Input {
   }
   isPlace() {
     return false;
+  }
+  handler() {
+    move(1, 0);
   }
 }
 
@@ -72,6 +76,9 @@ class Left implements Input {
   isPlace() {
     return false;
   }
+  handler() {
+    move(-1, 0);
+  }
 }
 
 class Up implements Input {
@@ -89,6 +96,9 @@ class Up implements Input {
   }
   isPlace() {
     return false;
+  }
+  handler() {
+    move(0, -1);
   }
 }
 
@@ -108,6 +118,9 @@ class Down implements Input {
   isPlace() {
     return false;
   }
+  handler() {
+    move(0, 1);
+  }
 }
 
 class Place implements Input {
@@ -125,6 +138,9 @@ class Place implements Input {
   }
   isPlace() {
     return true;
+  }
+  handler() {
+    placeBomb();
   }
 }
 
@@ -190,9 +206,14 @@ function update() {
   updateMap();
 }
 
+function handlerInput(input: Input) {
+  input.handler();
+}
+
 function handlerInputs() {
   while (!gameOver && inputs.length > 0) {
     let current = inputs.pop();
+    handlerInput(current);
   }
 
   if (
@@ -206,14 +227,6 @@ function handlerInputs() {
 
   if (--delay > 0) return;
   delay = DELAY;
-}
-
-function handlerInput(input: Input) {
-  if (input.isLeft()) move(-1, 0);
-  else if (input.isLeft) move(1, 0);
-  else if (input.isUp) move(0, -1);
-  else if (input.isDown) move(0, 1);
-  else if (input.isPlace) placeBomb();
 }
 
 function updateMap() {

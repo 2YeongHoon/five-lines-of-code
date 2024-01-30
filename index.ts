@@ -4,7 +4,7 @@ const SLEEP = 1000 / FPS;
 const TPS = 2;
 const DELAY = FPS / TPS;
 
-enum Tile {
+enum RawTile {
   AIR,
   UNBREAKABLE,
   STONE,
@@ -20,6 +20,72 @@ enum Tile {
   MONSTER_DOWN,
   TMP_MONSTER_DOWN,
   MONSTER_LEFT,
+}
+
+interface Tile2 {
+  isFlux(): boolean;
+  isUnbreakable(): boolean;
+  isStone(): boolean;
+  isBomb(): boolean;
+  isBombClose(): boolean;
+  isBombReallyClose(): boolean;
+  isTmpFire(): boolean;
+  isFire(): boolean;
+  isExtraBomb(): boolean;
+  isMonsterUp(): boolean;
+  isMonsterRight(): boolean;
+  isTmpMonsterRight(): boolean;
+  isMonsterDown(): boolean;
+  isTmpMonsterDown(): boolean;
+  isMonsterLeft(): boolean;
+}
+
+class Unbreakable implements Tile2 {
+  isFlux() {
+    return true;
+  }
+  isUnbreakable() {
+    return false;
+  }
+  isStone() {
+    return false;
+  }
+  isBomb() {
+    return false;
+  }
+  isBombClose() {
+    return false;
+  }
+  isBombReallyClose() {
+    return false;
+  }
+  isTmpFire() {
+    return false;
+  }
+  isFire() {
+    return false;
+  }
+  isExtraBomb() {
+    return false;
+  }
+  isMonsterUp() {
+    return false;
+  }
+  isMonsterRight() {
+    return false;
+  }
+  isTmpMonsterRight() {
+    return false;
+  }
+  isMonsterDown() {
+    return false;
+  }
+  isTmpMonsterDown() {
+    return false;
+  }
+  isMonsterLeft() {
+    return false;
+  }
 }
 
 enum RawInput {
@@ -287,25 +353,28 @@ function updateTitle(x: number, y: number) {
 function drawMap(g: CanvasRenderingContext2D) {
   for (let y = 0; y < map.length; y++) {
     for (let x = 0; x < map[y].length; x++) {
-      if (map[y][x] === Tile.UNBREAKABLE) g.fillStyle = "#999999";
-      else if (map[y][x] === Tile.STONE) g.fillStyle = "#0000cc";
-      else if (map[y][x] === Tile.EXTRA_BOMB) g.fillStyle = "#00cc00";
-      else if (map[y][x] === Tile.FIRE) g.fillStyle = "#ffcc00";
-      else if (
-        map[y][x] === Tile.MONSTER_UP ||
-        map[y][x] === Tile.MONSTER_LEFT ||
-        map[y][x] === Tile.MONSTER_RIGHT ||
-        map[y][x] === Tile.MONSTER_DOWN
-      )
-        g.fillStyle = "#cc00cc";
-      else if (map[y][x] === Tile.BOMB) g.fillStyle = "#770000";
-      else if (map[y][x] === Tile.BOMB_CLOSE) g.fillStyle = "#cc0000";
-      else if (map[y][x] === Tile.BOMB_REALLY_CLOSE) g.fillStyle = "#ff0000";
-
+      colorOfTitle(g, x, y);
       if (map[y][x] !== Tile.AIR)
         g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }
   }
+}
+
+function colorOfTitle(g: CanvasRenderingContext2D, x: number, y: number) {
+  if (map[y][x] === Tile.UNBREAKABLE) g.fillStyle = "#999999";
+  else if (map[y][x] === Tile.STONE) g.fillStyle = "#0000cc";
+  else if (map[y][x] === Tile.EXTRA_BOMB) g.fillStyle = "#00cc00";
+  else if (map[y][x] === Tile.FIRE) g.fillStyle = "#ffcc00";
+  else if (
+    map[y][x] === Tile.MONSTER_UP ||
+    map[y][x] === Tile.MONSTER_LEFT ||
+    map[y][x] === Tile.MONSTER_RIGHT ||
+    map[y][x] === Tile.MONSTER_DOWN
+  )
+    g.fillStyle = "#cc00cc";
+  else if (map[y][x] === Tile.BOMB) g.fillStyle = "#770000";
+  else if (map[y][x] === Tile.BOMB_CLOSE) g.fillStyle = "#cc0000";
+  else if (map[y][x] === Tile.BOMB_REALLY_CLOSE) g.fillStyle = "#ff0000";
 }
 
 function drawPlayer(g: CanvasRenderingContext2D) {

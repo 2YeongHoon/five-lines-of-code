@@ -1,495 +1,157 @@
 const TILE_SIZE = 30;
 const FPS = 30;
 const SLEEP = 1000 / FPS;
-const TPS = 2;
-const DELAY = FPS / TPS;
 
-enum RawTile {
+enum Tile {
   AIR,
+  FLUX,
   UNBREAKABLE,
+  PLAYER,
   STONE,
-  BOMB,
-  BOMB_CLOSE,
-  BOMB_REALLY_CLOSE,
-  TMP_FIRE,
-  FIRE,
-  EXTRA_BOMB,
-  MONSTER_UP,
-  MONSTER_RIGHT,
-  TMP_MONSTER_RIGHT,
-  MONSTER_DOWN,
-  TMP_MONSTER_DOWN,
-  MONSTER_LEFT,
+  FALLING_STONE,
+  BOX,
+  FALLING_BOX,
+  KEY1,
+  LOCK1,
+  KEY2,
+  LOCK2,
 }
 
-interface Tile2 {
-  isFlux(): boolean;
-  isUnbreakable(): boolean;
-  isStone(): boolean;
-  isBomb(): boolean;
-  isBombClose(): boolean;
-  isBombReallyClose(): boolean;
-  isTmpFire(): boolean;
-  isFire(): boolean;
-  isExtraBomb(): boolean;
-  isMonsterUp(): boolean;
-  isMonsterRight(): boolean;
-  isTmpMonsterRight(): boolean;
-  isMonsterDown(): boolean;
-  isTmpMonsterDown(): boolean;
-  isMonsterLeft(): boolean;
-}
-
-class Flux implements Tile2 {
-  isFlux() {
-    return true;
-  }
-  isUnbreakable() {
-    return false;
-  }
-  isStone() {
-    return false;
-  }
-  isBomb() {
-    return false;
-  }
-  isBombClose() {
-    return false;
-  }
-  isBombReallyClose() {
-    return false;
-  }
-  isTmpFire() {
-    return false;
-  }
-  isFire() {
-    return false;
-  }
-  isExtraBomb() {
-    return false;
-  }
-  isMonsterUp() {
-    return false;
-  }
-  isMonsterRight() {
-    return false;
-  }
-  isTmpMonsterRight() {
-    return false;
-  }
-  isMonsterDown() {
-    return false;
-  }
-  isTmpMonsterDown() {
-    return false;
-  }
-  isMonsterLeft() {
-    return false;
-  }
-}
-
-class Unbreakable implements Tile2 {
-  isFlux() {
-    return false;
-  }
-  isUnbreakable() {
-    return true;
-  }
-  isStone() {
-    return false;
-  }
-  isBomb() {
-    return false;
-  }
-  isBombClose() {
-    return false;
-  }
-  isBombReallyClose() {
-    return false;
-  }
-  isTmpFire() {
-    return false;
-  }
-  isFire() {
-    return false;
-  }
-  isExtraBomb() {
-    return false;
-  }
-  isMonsterUp() {
-    return false;
-  }
-  isMonsterRight() {
-    return false;
-  }
-  isTmpMonsterRight() {
-    return false;
-  }
-  isMonsterDown() {
-    return false;
-  }
-  isTmpMonsterDown() {
-    return false;
-  }
-  isMonsterLeft() {
-    return false;
-  }
-}
-
-class Stone implements Tile2 {
-  isFlux() {
-    return false;
-  }
-  isUnbreakable() {
-    return false;
-  }
-  isStone() {
-    return true;
-  }
-  isBomb() {
-    return false;
-  }
-  isBombClose() {
-    return false;
-  }
-  isBombReallyClose() {
-    return false;
-  }
-  isTmpFire() {
-    return false;
-  }
-  isFire() {
-    return false;
-  }
-  isExtraBomb() {
-    return false;
-  }
-  isMonsterUp() {
-    return false;
-  }
-  isMonsterRight() {
-    return false;
-  }
-  isTmpMonsterRight() {
-    return false;
-  }
-  isMonsterDown() {
-    return false;
-  }
-  isTmpMonsterDown() {
-    return false;
-  }
-  isMonsterLeft() {
-    return false;
-  }
-}
-
-enum RawInput {
+enum Input {
   UP,
   DOWN,
   LEFT,
   RIGHT,
-  PLACE,
-}
-
-interface Input {
-  isRight(): boolean;
-  isLeft(): boolean;
-  isUp(): boolean;
-  isDown(): boolean;
-  isPlace(): boolean;
-  handler(): void;
-}
-
-class Right implements Input {
-  isRight() {
-    return true;
-  }
-  isLeft() {
-    return false;
-  }
-  isUp() {
-    return false;
-  }
-  isDown() {
-    return false;
-  }
-  isPlace() {
-    return false;
-  }
-  handler() {
-    move(1, 0);
-  }
-}
-
-class Left implements Input {
-  isRight() {
-    return false;
-  }
-  isLeft() {
-    return true;
-  }
-  isUp() {
-    return false;
-  }
-  isDown() {
-    return false;
-  }
-  isPlace() {
-    return false;
-  }
-  handler() {
-    move(-1, 0);
-  }
-}
-
-class Up implements Input {
-  isRight() {
-    return false;
-  }
-  isLeft() {
-    return false;
-  }
-  isUp() {
-    return true;
-  }
-  isDown() {
-    return false;
-  }
-  isPlace() {
-    return false;
-  }
-  handler() {
-    move(0, -1);
-  }
-}
-
-class Down implements Input {
-  isRight() {
-    return false;
-  }
-  isLeft() {
-    return false;
-  }
-  isUp() {
-    return false;
-  }
-  isDown() {
-    return true;
-  }
-  isPlace() {
-    return false;
-  }
-  handler() {
-    move(0, 1);
-  }
-}
-
-class Place implements Input {
-  isRight() {
-    return false;
-  }
-  isLeft() {
-    return false;
-  }
-  isUp() {
-    return false;
-  }
-  isDown() {
-    return false;
-  }
-  isPlace() {
-    return true;
-  }
-  handler() {
-    placeBomb();
-  }
 }
 
 let playerx = 1;
 let playery = 1;
 let map: Tile[][] = [
-  [1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 2, 2, 2, 2, 2, 1],
-  [1, 0, 1, 2, 1, 2, 1, 2, 1],
-  [1, 2, 2, 2, 2, 2, 2, 2, 1],
-  [1, 2, 1, 2, 1, 2, 1, 2, 1],
-  [1, 2, 2, 2, 2, 0, 0, 0, 1],
-  [1, 2, 1, 2, 1, 0, 1, 0, 1],
-  [1, 2, 2, 2, 2, 0, 0, 10, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [2, 2, 2, 2, 2, 2, 2, 2],
+  [2, 3, 0, 1, 1, 2, 0, 2],
+  [2, 4, 2, 6, 1, 2, 0, 2],
+  [2, 8, 4, 1, 1, 2, 0, 2],
+  [2, 4, 1, 1, 1, 9, 0, 2],
+  [2, 2, 2, 2, 2, 2, 2, 2],
 ];
 
 let inputs: Input[] = [];
 
-let delay = 0;
-let bombs = 1;
-let gameOver = false;
-
-function explode(x: number, y: number, type: Tile) {
-  if (map[y][x].isStone()) {
-    if (Math.random() < 0.1) map[y][x] = new ExtraBomb();
-    else map[y][x] = type;
-  } else if (!map[y][x].isUnbreakable()) {
-    if (
-      map[y][x].isBomb() ||
-      map[y][x].isBombClose() ||
-      map[y][x].isBombReallyClose()
-    )
-      bombs++;
-    map[y][x] = type;
+function remove(tile: Tile) {
+  for (let y = 0; y < map.length; y++) {
+    for (let x = 0; x < map[y].length; x++) {
+      if (map[y][x] === tile) {
+        map[y][x] = Tile.AIR;
+      }
+    }
   }
 }
 
-function move(x: number, y: number) {
+function moveToTile(newx: number, newy: number) {
+  map[playery][playerx] = Tile.AIR;
+  map[newy][newx] = Tile.PLAYER;
+  playerx = newx;
+  playery = newy;
+}
+
+function moveHorizontal(dx: number) {
   if (
-    map[playery + y][playerx + x].isAir() ||
-    map[playery + y][playerx + x].isFire()
+    map[playery][playerx + dx] === Tile.FLUX ||
+    map[playery][playerx + dx] === Tile.AIR
   ) {
-    playery += y;
-    playerx += x;
-  } else if (map[playery + y][playerx + x].isExtraBomb()) {
-    playery += y;
-    playerx += x;
-    bombs++;
-    map[playery][playerx] = new Air();
+    moveToTile(playerx + dx, playery);
+  } else if (
+    (map[playery][playerx + dx] === Tile.STONE ||
+      map[playery][playerx + dx] === Tile.BOX) &&
+    map[playery][playerx + dx + dx] === Tile.AIR &&
+    map[playery + 1][playerx + dx] !== Tile.AIR
+  ) {
+    map[playery][playerx + dx + dx] = map[playery][playerx + dx];
+    moveToTile(playerx + dx, playery);
+  } else if (map[playery][playerx + dx] === Tile.KEY1) {
+    remove(Tile.LOCK1);
+    moveToTile(playerx + dx, playery);
+  } else if (map[playery][playerx + dx] === Tile.KEY2) {
+    remove(Tile.LOCK2);
+    moveToTile(playerx + dx, playery);
   }
 }
 
-function placeBomb() {
-  if (bombs > 0) {
-    map[playery][playerx] = new Bombs();
-    bombs--;
+function moveVertical(dy: number) {
+  if (
+    map[playery + dy][playerx] === Tile.FLUX ||
+    map[playery + dy][playerx] === Tile.AIR
+  ) {
+    moveToTile(playerx, playery + dy);
+  } else if (map[playery + dy][playerx] === Tile.KEY1) {
+    remove(Tile.LOCK1);
+    moveToTile(playerx, playery + dy);
+  } else if (map[playery + dy][playerx] === Tile.KEY2) {
+    remove(Tile.LOCK2);
+    moveToTile(playerx, playery + dy);
   }
 }
 
 function update() {
-  handlerInputs();
-  updateMap();
-}
-
-function handlerInputs() {
-  while (!gameOver && inputs.length > 0) {
-    let input = inputs.pop();
-    input.handler();
+  while (inputs.length > 0) {
+    let current = inputs.pop();
+    if (current === Input.LEFT) moveHorizontal(-1);
+    else if (current === Input.RIGHT) moveHorizontal(1);
+    else if (current === Input.UP) moveVertical(-1);
+    else if (current === Input.DOWN) moveVertical(1);
   }
 
-  if (
-    map[playery][playerx].isFire() ||
-    map[playery][playerx].isMonsterDown() ||
-    map[playery][playerx].isMonsterUp() ||
-    map[playery][playerx].isMonsterLeft() ||
-    map[playery][playerx].isMonsterRight()
-  )
-    gameOver = true;
-
-  if (--delay > 0) return;
-  delay = DELAY;
-}
-
-function updateMap() {
-  for (let y = 1; y < map.length; y++) {
-    for (let x = 1; x < map[y].length; x++) {
-      updateTitle(x, y);
-    }
-  }
-}
-
-function updateTitle(x: number, y: number) {
-  if (map[y][x].isBomb()) {
-    map[y][x] = Tile.BOMB_CLOSE;
-  } else if (map[y][x].isBomeClose()) {
-    map[y][x] = Tile.BOMB_REALLY_CLOSE;
-  } else if (map[y][x].isBombReallyClose()) {
-    explode(x + 0, y - 1, new Fire());
-    explode(x + 0, y + 1, new TmpFire());
-    explode(x - 1, y + 0, new Fire());
-    explode(x + 1, y + 0, new TmpFire());
-    map[y][x] = new Fire();
-    bombs++;
-  } else if (map[y][x].isTmpFire()) {
-    map[y][x] = new Fire();
-  } else if (map[y][x].isFire()) {
-    map[y][x] = new Air();
-  } else if (map[y][x].isMonsterDown()) {
-    map[y][x] = new MonsterDown();
-  } else if (map[y][x].isTmpMonsterRight()) {
-    map[y][x] = new MOnsterRight();
-  } else if (map[y][x].isMonsterRight()) {
-    if (map[y][x + 1].isAir()) {
-      map[y][x] = new Air();
-      map[y][x + 1] = new TmpMonsterRight();
-    } else {
-      map[y][x] = new MonsterDown();
-    }
-  } else if (map[y][x].isMonsterDown()) {
-    if (map[y + 1][x].isAir()) {
-      map[y][x] = new Air();
-      map[y + 1][x] = new TmpMonsterDown();
-    } else {
-      map[y][x] = new MonsterLeft();
-    }
-  } else if (map[y][x].isMonsterLeft()) {
-    if (map[y][x - 1].isAir()) {
-      map[y][x] = new Air();
-      map[y][x - 1] = new MonsterLeft();
-    } else {
-      map[y][x] = new MonsterUp();
-    }
-  } else if (map[y][x].isMonsterUp()) {
-    if (map[y - 1][x].isAir()) {
-      map[y][x] = new Air();
-      map[y - 1][x] = new MonsterUp();
-    } else {
-      map[y][x].isMonsterRight();
-    }
-  }
-}
-
-function drawMap(g: CanvasRenderingContext2D) {
-  for (let y = 0; y < map.length; y++) {
+  for (let y = map.length - 1; y >= 0; y--) {
     for (let x = 0; x < map[y].length; x++) {
-      colorOfTitle(g, x, y);
-      if (!map[y][x].isAir())
-        g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+      if (
+        (map[y][x] === Tile.STONE || map[y][x] === Tile.FALLING_STONE) &&
+        map[y + 1][x] === Tile.AIR
+      ) {
+        map[y + 1][x] = Tile.FALLING_STONE;
+        map[y][x] = Tile.AIR;
+      } else if (
+        (map[y][x] === Tile.BOX || map[y][x] === Tile.FALLING_BOX) &&
+        map[y + 1][x] === Tile.AIR
+      ) {
+        map[y + 1][x] = Tile.FALLING_BOX;
+        map[y][x] = Tile.AIR;
+      } else if (map[y][x] === Tile.FALLING_STONE) {
+        map[y][x] = Tile.STONE;
+      } else if (map[y][x] === Tile.FALLING_BOX) {
+        map[y][x] = Tile.BOX;
+      }
     }
   }
 }
 
-function colorOfTitle(g: CanvasRenderingContext2D, x: number, y: number) {
-  if (map[y][x].isUnbreakable()) g.fillStyle = "#999999";
-  else if (map[y][x].isStone()) g.fillStyle = "#0000cc";
-  else if (map[y][x].isExtraBomb()) g.fillStyle = "#00cc00";
-  else if (map[y][x].isFire) g.fillStyle = "#ffcc00";
-  else if (
-    map[y][x].isMonsterUp() ||
-    map[y][x].isMonsterLeft() ||
-    map[y][x].isMonsterRight() ||
-    map[y][x].isMonsterDown()
-  )
-    g.fillStyle = "#cc00cc";
-  else if (map[y][x].isBomb()) g.fillStyle = "#770000";
-  else if (map[y][x].isBombClose()) g.fillStyle = "#cc0000";
-  else if (map[y][x].isBombReallyClose) g.fillStyle = "#ff0000";
-}
-
-function drawPlayer(g: CanvasRenderingContext2D) {
-  g.fillStyle = "#00ff00";
-  if (!gameOver)
-    g.fillRect(playerx * TILE_SIZE, playery * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-}
-
-function createGraphics() {
-  let canvas = <HTMLCanvasElement>document.getElementById("GameCanvas");
+function draw() {
+  let canvas = document.getElementById("GameCanvas") as HTMLCanvasElement;
   let g = canvas.getContext("2d");
 
   g.clearRect(0, 0, canvas.width, canvas.height);
-  return g;
-}
-function draw() {
-  let g = createGraphics();
-  drawMap(g);
-  drawPlayer(g);
+
+  // Draw map
+  for (let y = 0; y < map.length; y++) {
+    for (let x = 0; x < map[y].length; x++) {
+      if (map[y][x] === Tile.FLUX) g.fillStyle = "#ccffcc";
+      else if (map[y][x] === Tile.UNBREAKABLE) g.fillStyle = "#999999";
+      else if (map[y][x] === Tile.STONE || map[y][x] === Tile.FALLING_STONE)
+        g.fillStyle = "#0000cc";
+      else if (map[y][x] === Tile.BOX || map[y][x] === Tile.FALLING_BOX)
+        g.fillStyle = "#8b4513";
+      else if (map[y][x] === Tile.KEY1 || map[y][x] === Tile.LOCK1)
+        g.fillStyle = "#ffcc00";
+      else if (map[y][x] === Tile.KEY2 || map[y][x] === Tile.LOCK2)
+        g.fillStyle = "#00ccff";
+
+      if (map[y][x] !== Tile.AIR && map[y][x] !== Tile.PLAYER)
+        g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+    }
+  }
+
+  // Draw player
+  g.fillStyle = "#ff0000";
+  g.fillRect(playerx * TILE_SIZE, playery * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 }
 
 function gameLoop() {
@@ -511,9 +173,8 @@ const UP_KEY = "ArrowUp";
 const RIGHT_KEY = "ArrowRight";
 const DOWN_KEY = "ArrowDown";
 window.addEventListener("keydown", (e) => {
-  if (e.key === LEFT_KEY || e.key === "a") inputs.push(new Left());
-  else if (e.key === UP_KEY || e.key === "w") inputs.push(new Up());
-  else if (e.key === RIGHT_KEY || e.key === "d") inputs.push(new Right());
-  else if (e.key === DOWN_KEY || e.key === "s") inputs.push(new Down());
-  else if (e.key === " ") inputs.push(new Place());
+  if (e.key === LEFT_KEY || e.key === "a") inputs.push(Input.LEFT);
+  else if (e.key === UP_KEY || e.key === "w") inputs.push(Input.UP);
+  else if (e.key === RIGHT_KEY || e.key === "d") inputs.push(Input.RIGHT);
+  else if (e.key === DOWN_KEY || e.key === "s") inputs.push(Input.DOWN);
 });

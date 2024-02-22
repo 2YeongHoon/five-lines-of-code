@@ -11,4 +11,8 @@ class Down implements Input {
   isDown() {
     return true;
   }
+
+  handle() {
+    moveVertical(1);
+  }
 }

@@ -11,4 +11,7 @@ class Right implements Input {
   isDown() {
     return false;
   }
+  handle() {
+    moveVertical(1);
+  }
 }

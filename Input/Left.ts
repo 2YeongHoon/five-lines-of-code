@@ -11,4 +11,8 @@ class Left implements Input {
   isDown() {
     return false;
   }
+
+  handle() {
+    moveVertical(-1);
+  }
 }

@@ -139,11 +139,11 @@ function createGraphics() {
 
 function draw() {
   let g = createGraphics();
-  drwaMap(g);
+  drawMap(g);
   drawPlayer(g);
 }
 
-function drwaMap(g: CanvasRenderingContext2D) {
+function drawMap(g: CanvasRenderingContext2D) {
   for (let y = 0; y < map.length; y++) {
     for (let x = 0; x < map[y].length; x++) {
       if (map[y][x] === Tile.FLUX) g.fillStyle = "#ccffcc";

@@ -99,13 +99,9 @@ function update() {
 
 function handlerInputs() {
   while (inputs.length > 0) {
-    let current = inputs.pop();
-    handlerInput(current);
+    let input = inputs.pop();
+    input.handle();
   }
-}
-
-function handlerInput(input: Input) {
-  input.handle();
 }
 
 function updateMap() {

@@ -29,6 +29,35 @@ let rawMap: RawTile[][] = [
   [2, 2, 2, 2, 2, 2, 2, 2],
 ];
 
+function assertExhausted(x: never): never {
+  throw new Error("Unexpected object: " + x);
+}
+
+function transformTile(tile: RawTile) {
+  //TODO: 코드 작성
+  switch (tile) {
+    case RawTile.AIR:
+      return new Air();
+    default:
+      assertExhausted(tile);
+  }
+}
+
+function transformMap() {
+  map = new Array(rawMap.length);
+  for (let y = 0; y < rawMap.length; y++) {
+    map[y] = new Array(rawMap[y].length);
+    for (let x = 0; x < rawMap[y].length; x++) {
+      map[y][x] = transformTile(rawMap[y][x]);
+    }
+  }
+}
+
+window.onload = () => {
+  transformMap();
+  gameLoop();
+};
+
 let inputs: Input[] = [];
 
 function removeLock1() {

@@ -34,10 +34,31 @@ function assertExhausted(x: never): never {
 }
 
 function transformTile(tile: RawTile) {
-  //TODO: 코드 작성
   switch (tile) {
     case RawTile.AIR:
       return new Air();
+    case RawTile.PLAYER:
+      return new Player();
+    case RawTile.UNBREAKABLE:
+      return new Unbreakable();
+    case RawTile.STONE:
+      return new Stone();
+    case RawTile.FALLING_STONE:
+      return new FallingStone();
+    case RawTile.BOX:
+      return new Box();
+    case RawTile.FALLING_BOX:
+      return new FallingBox();
+    case RawTile.FLUX:
+      return new Flux();
+    case RawTile.KEY1:
+      return new Key1();
+    case RawTile.KEY2:
+      return new Key2();
+    case RawTile.LOCK1:
+      return new Lock1();
+    case RawTile.LOCK2:
+      return new Lock2();
     default:
       assertExhausted(tile);
   }

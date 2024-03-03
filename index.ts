@@ -19,7 +19,7 @@ enum RawTile {
 
 let playerx = 1;
 let playery = 1;
-let map: Tile2[][];
+let map: Tile[][];
 let rawMap: RawTile[][] = [
   [2, 2, 2, 2, 2, 2, 2, 2],
   [2, 3, 0, 1, 1, 2, 0, 2],
@@ -197,21 +197,11 @@ function draw() {
 function drawMap(g: CanvasRenderingContext2D) {
   for (let y = 0; y < map.length; y++) {
     for (let x = 0; x < map[y].length; x++) {
-      colorOfTile(g, x, y);
+      map[y][x].color(g);
       if (!map[y][x].isAir && !map[y][x].isPlayer)
         g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }
   }
-}
-
-function colorOfTile(g: CanvasRenderingContext2D, x: number, y: number) {
-  if (map[y][x].isFlux) g.fillStyle = "#ccffcc";
-  else if (map[y][x].isUnbreakable) g.fillStyle = "#999999";
-  else if (map[y][x].isStone || map[y][x].isFallingStone)
-    g.fillStyle = "#0000cc";
-  else if (map[y][x].isBox || map[y][x].isFallingBox) g.fillStyle = "#8b4513";
-  else if (map[y][x].isKey1 || map[y][x].isLock1) g.fillStyle = "#ffcc00";
-  else if (map[y][x].isKey2 || map[y][x].isLock2) g.fillStyle = "#00ccff";
 }
 
 function drawPlayer(g: CanvasRenderingContext2D) {

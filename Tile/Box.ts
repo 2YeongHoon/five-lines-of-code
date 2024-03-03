@@ -1,4 +1,4 @@
-class Box implements Tile2 {
+class Box implements Tile {
   isAir() {
     return false;
   }
@@ -34,5 +34,8 @@ class Box implements Tile2 {
   }
   isLock2() {
     return false;
+  }
+  color(g: CanvasRenderingContext2D) {
+    g.fillStyle = "#8b4513";
   }
 }

@@ -1,4 +1,4 @@
-class FallingBox implements Tile2 {
+class FallingBox implements Tile {
   isAir() {
     return false;
   }
@@ -34,5 +34,8 @@ class FallingBox implements Tile2 {
   }
   isLock2() {
     return false;
+  }
+  color(g: CanvasRenderingContext2D) {
+    g.fillStyle = "#8b4513";
   }
 }

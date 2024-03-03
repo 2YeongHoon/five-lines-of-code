@@ -1,4 +1,4 @@
-class Player implements Tile2 {
+class Player implements Tile {
   isAir() {
     return false;
   }
@@ -35,4 +35,5 @@ class Player implements Tile2 {
   isLock2() {
     return false;
   }
+  color(g: CanvasRenderingContext2D) {}
 }

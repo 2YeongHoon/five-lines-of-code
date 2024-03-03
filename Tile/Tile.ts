@@ -1,4 +1,4 @@
-interface Tile2 {
+interface Tile {
   isAir(): boolean;
   isFlux(): boolean;
   isUnbreakable(): boolean;
@@ -11,4 +11,5 @@ interface Tile2 {
   isKey2(): boolean;
   isLock1(): boolean;
   isLock2(): boolean;
+  color(g: CanvasRenderingContext2D): void;
 }

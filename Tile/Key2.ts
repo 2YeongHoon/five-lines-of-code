@@ -1,4 +1,4 @@
-class Key2 implements Tile2 {
+class Key2 implements Tile {
   isAir() {
     return false;
   }
@@ -34,5 +34,8 @@ class Key2 implements Tile2 {
   }
   isLock2() {
     return false;
+  }
+  color(g: CanvasRenderingContext2D) {
+    g.fillStyle = "#00ccff";
   }
 }

@@ -36,4 +36,5 @@ class Player implements Tile {
     return false;
   }
   color(g: CanvasRenderingContext2D) {}
+  draw(g: CanvasRenderingContext2D, x: number, y: number): void {}
 }

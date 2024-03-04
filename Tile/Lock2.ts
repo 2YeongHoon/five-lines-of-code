@@ -38,4 +38,7 @@ class Lock2 implements Tile {
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#00ccff";
   }
+  draw(g: CanvasRenderingContext2D, x: number, y: number): void {
+    g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  }
 }

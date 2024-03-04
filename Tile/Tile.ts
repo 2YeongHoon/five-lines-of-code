@@ -12,4 +12,5 @@ interface Tile {
   isLock1(): boolean;
   isLock2(): boolean;
   color(g: CanvasRenderingContext2D): void;
+  draw(g: CanvasRenderingContext2D, x: number, y: number): void;
 }

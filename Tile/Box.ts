@@ -35,6 +35,12 @@ class Box implements Tile {
   isLock2() {
     return false;
   }
+  isEdible() {
+    return false;
+  }
+  isPushable() {
+    return true;
+  }
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#8b4513";
   }

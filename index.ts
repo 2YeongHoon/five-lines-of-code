@@ -109,14 +109,10 @@ function moveToTile(newx: number, newy: number) {
 }
 
 function moveHorizontal(dx: number) {
-  if (
-    map[playery][playerx + dx].isFlux() ||
-    map[playery][playerx + dx].isAir()
-  ) {
+  if (map[playery][playerx + dx].isEdible) {
     moveToTile(playerx + dx, playery);
   } else if (
-    (map[playery][playerx + dx].isStone() ||
-      map[playery][playerx + dx].isBox()) &&
+    map[playery][playerx + dx].isPushable &&
     map[playery][playerx + dx + dx].isAir() &&
     !map[playery + 1][playerx + dx].isAir()
   ) {

@@ -35,6 +35,12 @@ class Flux implements Tile {
   isLock2() {
     return false;
   }
+  isEdible() {
+    return true;
+  }
+  isPushable() {
+    return false;
+  }
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "ccffcc";
   }

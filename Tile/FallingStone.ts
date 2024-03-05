@@ -29,10 +29,17 @@ class FallingStone implements Tile {
   isKey2() {
     return false;
   }
+
   isLock1() {
     return false;
   }
   isLock2() {
+    return false;
+  }
+  isEdible() {
+    return false;
+  }
+  isPushable() {
     return false;
   }
   color(g: CanvasRenderingContext2D) {

@@ -35,6 +35,12 @@ class Key1 implements Tile {
   isLock2() {
     return false;
   }
+  isEdible() {
+    return false;
+  }
+  isPushable() {
+    return false;
+  }
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#ffcc00";
   }

@@ -35,6 +35,12 @@ class Air implements Tile {
   isLock2() {
     return false;
   }
+  isEdible() {
+    return true;
+  }
+  isPushable() {
+    return false;
+  }
   color(g: CanvasRenderingContext2D) {}
   draw(g: CanvasRenderingContext2D, x: number, y: number): void {}
 }

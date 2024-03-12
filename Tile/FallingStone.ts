@@ -42,6 +42,12 @@ class FallingStone implements Tile {
   isPushable() {
     return false;
   }
+  isStony() {
+    return true;
+  }
+  isBoxy() {
+    return false;
+  }
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#0000cc";
   }

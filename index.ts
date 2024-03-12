@@ -139,16 +139,10 @@ function handlerInputs() {
 function updateMap() {
   for (let y = map.length - 1; y >= 0; y--) {
     for (let x = 0; x < map[y].length; x++) {
-      if (
-        (map[y][x].isStone || map[y][x].isFallingStone) &&
-        map[y + 1][x].isAir
-      ) {
+      if (map[y][x].isStony && map[y + 1][x].isAir) {
         map[y + 1][x] = new FallingStone();
         map[y][x] = new Air();
-      } else if (
-        (map[y][x].isBox || map[y][x].isFallingBox) &&
-        map[y + 1][x].isAir
-      ) {
+      } else if (map[y][x].isBoxy && map[y + 1][x].isAir) {
         map[y + 1][x] = new FallingBox();
         map[y][x] = new Air();
       } else if (map[y][x].isFallingStone) {

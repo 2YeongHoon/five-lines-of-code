@@ -41,6 +41,12 @@ class Lock2 implements Tile {
   isPushable() {
     return false;
   }
+  isStony() {
+    return false;
+  }
+  isBoxy() {
+    return false;
+  }
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#00ccff";
   }

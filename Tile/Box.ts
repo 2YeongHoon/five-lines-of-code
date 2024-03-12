@@ -41,6 +41,12 @@ class Box implements Tile {
   isPushable() {
     return true;
   }
+  isStony() {
+    return false;
+  }
+  isBoxy() {
+    return true;
+  }
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#8b4513";
   }

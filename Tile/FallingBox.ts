@@ -41,6 +41,12 @@ class FallingBox implements Tile {
   isPushable() {
     return false;
   }
+  isStony() {
+    return false;
+  }
+  isBoxy() {
+    return true;
+  }
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#8b4513";
   }

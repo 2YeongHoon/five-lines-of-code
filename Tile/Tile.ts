@@ -13,6 +13,8 @@ interface Tile {
   isLock2(): boolean;
   isEdible(): boolean;
   isPushable(): boolean;
+  isStony(): boolean;
+  isBoxy(): boolean;
 
   color(g: CanvasRenderingContext2D): void;
   draw(g: CanvasRenderingContext2D, x: number, y: number): void;

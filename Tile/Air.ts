@@ -41,6 +41,12 @@ class Air implements Tile {
   isPushable() {
     return false;
   }
+  isStony() {
+    return false;
+  }
+  isBoxy() {
+    return false;
+  }
   color(g: CanvasRenderingContext2D) {}
   draw(g: CanvasRenderingContext2D, x: number, y: number) {}
   moveHorizontal(dx: number) {

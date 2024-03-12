@@ -41,6 +41,12 @@ class Stone implements Tile {
   isPushable() {
     return true;
   }
+  isStony() {
+    return true;
+  }
+  isBoxy() {
+    return false;
+  }
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#0000cc";
   }

@@ -2,6 +2,11 @@ const TILE_SIZE = 30;
 const FPS = 30;
 const SLEEP = 1000 / FPS;
 
+enum FallingStatus {
+  FALLING,
+  RESTING,
+}
+
 enum RawTile {
   AIR,
   FLUX,
@@ -42,9 +47,9 @@ function transformTile(tile: RawTile) {
     case RawTile.UNBREAKABLE:
       return new Unbreakable();
     case RawTile.STONE:
-      return new Stone(false);
+      return new Stone(new Falling());
     case RawTile.FALLING_STONE:
-      return new Stone(true);
+      return new Stone(new Resting());
     case RawTile.BOX:
       return new Box();
     case RawTile.FALLING_BOX:
@@ -140,13 +145,13 @@ function updateTile() {
   for (let y = map.length - 1; y >= 0; y--) {
     for (let x = 0; x < map[y].length; x++) {
       if (map[y][x].isStony && map[y + 1][x].isAir) {
-        map[y + 1][x] = new Stone(true);
+        map[y + 1][x] = new Stone(new Falling());
         map[y][x] = new Air();
       } else if (map[y][x].isBoxy && map[y + 1][x].isAir) {
         map[y + 1][x] = new FallingBox();
         map[y][x] = new Air();
       } else if (map[y][x].isFallingStone) {
-        map[y][x] = new Stone(false);
+        map[y][x] = new Stone(new Resting());
       } else if (map[y][x].isFallingBox) {
         map[y][x] = new Box();
       }

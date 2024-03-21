@@ -5,4 +5,5 @@ class Falling implements FallingStats {
   isResting() {
     return false;
   }
+  moveHorizontal(tile: Tile, dx: number) {}
 }

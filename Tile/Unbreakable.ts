@@ -47,6 +47,8 @@ class Unbreakable implements Tile {
   isBoxy() {
     return false;
   }
+  drop() {}
+  rest() {}
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#999999";
   }

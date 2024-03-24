@@ -47,6 +47,8 @@ class Box implements Tile {
   isBoxy() {
     return true;
   }
+  drop() {}
+  rest() {}
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#8b4513";
   }

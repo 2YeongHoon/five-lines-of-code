@@ -16,6 +16,9 @@ interface Tile {
   isStony(): boolean;
   isBoxy(): boolean;
 
+  drop(): void;
+  rest(): void;
+
   color(g: CanvasRenderingContext2D): void;
   draw(g: CanvasRenderingContext2D, x: number, y: number): void;
   moveHorizontal(dx: number): void;

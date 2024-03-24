@@ -48,6 +48,12 @@ class Stone implements Tile {
   isBoxy() {
     return false;
   }
+  drop() {
+    this.falling = new Falling();
+  }
+  rest() {
+    this.falling = new Resting();
+  }
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#0000cc";
   }

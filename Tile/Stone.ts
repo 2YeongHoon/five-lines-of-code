@@ -54,6 +54,19 @@ class Stone implements Tile {
   rest() {
     this.falling = new Resting();
   }
+  update(x: number, y: number): void {
+    for (let y = map.length - 1; y >= 0; y--) {
+      for (let x = 0; x < map[y].length; x++) {
+        if (map[y][x].isAir()) {
+          this.falling = new Falling();
+          map[y + 1][x] = this;
+          map[y][x] = new Air();
+        } else if (this.falling.isFalling()) {
+          this.falling = new Resting();
+        }
+      }
+    }
+  }
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#0000cc";
   }

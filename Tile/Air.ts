@@ -49,6 +49,8 @@ class Air implements Tile {
   }
   drop() {}
   rest() {}
+  update(x: number, y: number) {}
+
   color(g: CanvasRenderingContext2D) {}
   draw(g: CanvasRenderingContext2D, x: number, y: number) {}
   moveHorizontal(dx: number) {

@@ -18,6 +18,7 @@ interface Tile {
 
   drop(): void;
   rest(): void;
+  update(x: number, y: number): void;
 
   color(g: CanvasRenderingContext2D): void;
   draw(g: CanvasRenderingContext2D, x: number, y: number): void;

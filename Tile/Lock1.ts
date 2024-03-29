@@ -49,6 +49,8 @@ class Lock1 implements Tile {
   }
   drop() {}
   rest() {}
+  update(x: number, y: number) {}
+
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#ffcc00";
   }

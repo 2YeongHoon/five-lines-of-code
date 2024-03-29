@@ -49,6 +49,8 @@ class FallingBox implements Tile {
   }
   drop() {}
   rest() {}
+  update(x: number, y: number) {}
+
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#8b4513";
   }

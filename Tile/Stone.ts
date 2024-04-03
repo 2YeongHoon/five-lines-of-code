@@ -1,5 +1,9 @@
 class Stone implements Tile {
-  constructor(private falling: FallingStats) {}
+  private fallStrategy: FallStrategy;
+
+  constructor(private falling: FallingStats) {
+    this.fallStrategy = new FallStrategy(falling);
+  }
   isAir() {
     return false;
   }
@@ -55,13 +59,7 @@ class Stone implements Tile {
     this.falling = new Resting();
   }
   update(x: number, y: number): void {
-    if (map[y + 1][x].isAir()) {
-      this.falling = new Falling();
-      map[y + 1][x] = this;
-      map[y][x] = new Air();
-    } else if (this.falling.isFalling()) {
-      this.falling = new Resting();
-    }
+    this.fallStrategy.update(this, x, y);
   }
   color(g: CanvasRenderingContext2D) {
     g.fillStyle = "#0000cc";
@@ -70,6 +68,6 @@ class Stone implements Tile {
     g.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
   }
   moveHorizontal(dx: number) {
-    this.falling.moveHorizontal(this, dx);
+    this.fallStrategy.getFalling().moveHorizontal(this, dx);
   }
 }

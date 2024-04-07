@@ -4,6 +4,7 @@ class Stone implements Tile {
   constructor(private falling: FallingStats) {
     this.fallStrategy = new FallStrategy(falling);
   }
+
   isAir() {
     return false;
   }

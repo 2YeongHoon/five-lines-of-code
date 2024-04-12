@@ -82,9 +82,10 @@ window.onload = () => {
 let inputs: Input[] = [];
 
 function removeLock1() {
+  let shouldRemove = new RemoveStrategy();
   for (let y = 0; y < map.length; y++) {
     for (let x = 0; x < map[y].length; x++) {
-      if (map[y][x].isLock1) {
+      if (shouldRemove.check(map[y][x])) {
         map[y][x] = new Air();
       }
     }
